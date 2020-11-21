@@ -6,6 +6,8 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
+import mapStyles from './mapStyles';
+import './Map.css'
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -16,6 +18,11 @@ const center = {
   lat: 60.69121,
   lng: 28.77368,
 };
+const options = {
+  styles: mapStyles,
+  disableDefaultUI: true,
+  zoomControl: true
+} 
 
 export default function Map() {
   const { isLoaded, loadError } = useLoadScript({
@@ -28,7 +35,8 @@ export default function Map() {
 
   return (
     <div>
-      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center}>
+    <h1 className="header-name">Find a bench {" "} </h1>
+      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} options={options} >
         
       </GoogleMap>
     </div>
