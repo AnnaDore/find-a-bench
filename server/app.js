@@ -11,10 +11,14 @@ const path         = require('path');
 const cors = require('cors');
 
 
+const session = require('express-session')
+const Mongostore = require('connect-mongo')(session)
+
+
 mongoose
   .connect('mongodb://localhost/find-a-bench',  {
     useCreateIndex: true,
-    userNewUrlParser: true,
+     userNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(x => {
@@ -63,6 +67,9 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 const index = require('./routes/index');
 app.use('/', index);
+
+const auth = require('./routes/auth');
+app.use('/', auth);
 
 
 module.exports = app;
