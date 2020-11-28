@@ -41,7 +41,7 @@ router.post("/signup", async (req, res) => {
 
     const user = await User.create({ username: username, password: hashPass, email: email });
 
-  //  req.session.user = user;
+    req.session.user = user;
     res.status(200).json(user);
     return;
   } catch (err) {
@@ -49,5 +49,52 @@ router.post("/signup", async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body
+  
+    console.log(req.body)
+    if (!email || !password) {
+      res.status(400).json({ message: 'Please, fill both fields' })
+      return
+    }
+  
+    try {
+      const user = await User.findOne({ email })
+  
+      if (user) {
+        const passwordCorrect = await bcrypt.compare(password, user.password)
+        if (passwordCorrect) {
+          req.session.user = user
+          res.status(200).json(user)
+        } else {
+            res
+          .status(400)
+          .json({ message: 'Password is incorrect' })
+        }
+      } else {
+        res
+          .status(400)
+          .json({ message: 'User does not exist' })
+      }
+    } catch (err) {
+      console.log(err)
+      res.status(500).json({ message: 'Something went wrong' })
+    }
+  })
+
+  router.get('/user/:id', (req, res) => {
+    if (req.session.user) {
+      res.status(200).json(req.session.user)
+    } else {
+      res.status(400).json({ message: 'No user in session' })
+    }
+  })
+
+  router.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.status(200).json({ message: 'User is logged out' })
+  })
+
 
 module.exports = router
