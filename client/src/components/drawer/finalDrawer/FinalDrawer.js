@@ -26,17 +26,18 @@ export default class FinalDrawer extends Component {
     let backdrop;
 
     if (this.state.sideDrawerOpen) {
-      sideDrawer = <SideDrawer show={this.state.sideDrawerOpen}/>;
-      backdrop = <Backrdrop click={this.backdropClickHandler} />;
+      // sideDrawer = <SideDrawer show={this.state.sideDrawerOpen}/>
+      backdrop = <Backrdrop click={this.backdropClickHandler} />
     }
 
     return (
-      <div>
+      <article className="drawer-container">
+
         <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
-        {/* <SideDrawer />; */}
-        {sideDrawer}
+        <SideDrawer  show={this.state.sideDrawerOpen} />
+        {/* {sideDrawer} */}
         {backdrop}
-      </div>
+      </article>
     );
   }
 }

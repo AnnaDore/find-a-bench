@@ -9,7 +9,7 @@ export default class App extends Component {
     return (
       <div>
         <FinalDrawer />
-        <Map />
+       
         <main>
           <Switch>
             <Route exact path="/" component={Map} />
