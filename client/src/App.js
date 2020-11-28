@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route, Link } from "react-router-dom";
 import Map from "./components/map/Map";
-import Toolbar from "./components/toolbar/Toolbar";
-import SideDrawer from './components/SideDrawer/SideDrawer'
+import FinalDrawer from "./components/drawer/finalDrawer/FinalDrawer";
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <Toolbar />
-        <SideDrawer />
+        <FinalDrawer />
+        <Map />
         <main>
           <Switch>
             <Route exact path="/" component={Map} />
