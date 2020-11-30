@@ -16,13 +16,13 @@ export default function Toolbar(props) {
         <div className="toolbar-navigation-item">
           <ul>
             <li>
-              <a href="/">SIGN UP</a>
+              <a href="/signup">SIGN UP</a>
             </li>
             <li>
-              <a href="/">USER NAME</a>
+              <a href="/login">USER NAME</a>
             </li>
             <li>
-              <a href="/">LOG OUT</a>
+              <a href="/logout">LOG OUT</a>
             </li>
           </ul>
         </div>

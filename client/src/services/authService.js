@@ -14,9 +14,9 @@ class AuthService {
       .post("/auth/signup", { username, email, password })
       .then((response) => response.data);
   };
-  login = (username, password) => {
+  login = (email, password) => {
     return this.service
-      .post("/auth/login", { username, password })
+      .post("/auth/login", { email, password })
       .then((response) => response.data);
   };
   logout = () => {

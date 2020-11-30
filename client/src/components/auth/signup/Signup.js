@@ -39,6 +39,7 @@ export default class Signup extends Component {
   };
 
   render() {
+      
     console.log(this.state);
     if (this.state.redirect) {
       return <Redirect to="/"></Redirect>;
@@ -72,6 +73,7 @@ export default class Signup extends Component {
           />
           <button>Sign up</button>
         </form>
+       <p> Already have an account? <a href="/login">Login</a></p>
       </div>
     );
   }
