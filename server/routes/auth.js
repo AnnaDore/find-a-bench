@@ -83,7 +83,7 @@ router.post('/login', async (req, res) => {
     }
   })
 
-  router.get('/user/:id', (req, res) => {
+  router.get('/loggedin', (req, res) => {
     if (req.session.user) {
       res.status(200).json(req.session.user)
     } else {

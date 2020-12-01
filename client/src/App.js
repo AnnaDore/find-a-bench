@@ -14,6 +14,18 @@ export default class App extends Component {
 
   service = new AuthService();
 
+  componentDidMount = () => {
+    this.service.loggedin()
+    .then(user => {
+      this.setState({
+        loggedInUser: user
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   getTheUser = (user) => {
     this.setState({
       loggedInUser: user,

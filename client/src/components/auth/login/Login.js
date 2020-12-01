@@ -26,7 +26,7 @@ export default class Login extends Component {
       .login(this.state.email, this.state.password)
       .then((user) => {
         this.props.getMyUser(user)
-        console.log(user)
+       // console.log(user)
         this.setState({
           email: "",
           password: "",

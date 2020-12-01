@@ -1,31 +1,10 @@
 import React from "react";
 import DrawerToggleButton from "../SideDrawer/DrawerToggleButton";
 import "./Toolbar.css";
+import ListOfBtns from "../listOfButtons/ListOfBtns"
 
 export default function Toolbar(props) {
   console.log(props, "Toolbar");
-  let btnsLoggedInOut;
-  if (props.user) {
-    btnsLoggedInOut = (
-      <ul>
-        <li>
-          <a href="/login">{props.user.username}</a>
-        </li>
-        <li>
-          <a href="/logout">LOG OUT</a>
-        </li>
-      </ul>
-    );
-  } else {
-    btnsLoggedInOut = (
-    <ul>
-      <li>
-        <a href="/signup">SIGN UP</a>
-      </li>
-    </ul>
-    )
-  }
-
   return (
     <header className="toolbar">
       <nav className="toolbar-navigation">
@@ -37,7 +16,8 @@ export default function Toolbar(props) {
         </div>
         <div className="space-between" />
         <div className="toolbar-navigation-item">
-        {btnsLoggedInOut}
+        <ListOfBtns user={props.user}/>
+        
         </div>
       </nav>
     </header>
