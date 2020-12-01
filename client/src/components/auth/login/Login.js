@@ -8,39 +8,50 @@ export default class Login extends Component {
     email: "",
     password: "",
     redirect: false,
+    errorMsg: "",
   };
 
   service = new AuthService();
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ 
-        [name]: value
-    })
-   // console.log(this.state)
+    this.setState({
+      [name]: value,
+    });
   };
 
   handleFormSubmit = (e) => {
-    e.preventDefault()
-    this.service.login(this.state.email, this.state.password)
-    .then(response => {
-        console.log(response)
+    e.preventDefault();
+    this.service
+      .login(this.state.email, this.state.password)
+      .then((user) => {
+        this.props.getMyUser(user)
+        console.log(user)
         this.setState({
-            email: "",
-            password: "", 
-            redirect: true
-        })
-    })
-    .catch(err => {
-        console.log(err)
-    })
+          email: "",
+          password: "",
+          redirect: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err) {
+          this.setState({
+            errorMsg: err.response.data.message,
+          });
+        } else {
+            this.setState({
+            errorMsg: "Email is invalid"
+          });
+        }
+      });
   };
 
   render() {
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }
-
+   // console.log(this.props, "getMyUser from App.js")
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
@@ -52,7 +63,7 @@ export default class Login extends Component {
             value={this.state.email}
             onChange={this.handleChange}
           />
-           <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             placeholder="Password"
@@ -62,7 +73,10 @@ export default class Login extends Component {
           />
           <button>Login</button>
         </form>
-        <p>Don't have an account? <a href="/signup">Signup</a></p>
+        <p>
+          Don't have an account? <Link to="/signup">Signup</Link>
+        </p>
+        {this.state.errorMsg}
       </div>
     );
   }

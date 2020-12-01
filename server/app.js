@@ -39,9 +39,13 @@ const app = express();
 app.use(logger('dev'));
 
 app.use(session({
-  secret: 'myspecialsecret',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true, 
+  cookie: { maxAge: 60000000000000000}, //=1 min
   store: new Mongostore({
-    mongooseConnection: mongoose.connection
+    mongooseConnection: mongoose.connection,
+    ttl: 60 * 60 * 24 // sec min h = day
   })
 }))
 

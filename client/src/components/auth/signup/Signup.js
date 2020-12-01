@@ -7,6 +7,7 @@ export default class Signup extends Component {
     username: "",
     email: "",
     password: "",
+    errorMsg: "",
     redirect: false,
   };
 
@@ -25,7 +26,7 @@ export default class Signup extends Component {
     this.service
       .signup(this.state.username, this.state.email, this.state.password)
       .then((response) => {
-        console.log(response);
+     //   console.log(response);
         this.setState({
           username: "",
           password: "",
@@ -35,12 +36,15 @@ export default class Signup extends Component {
       })
       .catch((err) => {
         console.log(err);
+        this.setState({
+            errorMsg:  err.response.data.message
+        })
       });
   };
 
   render() {
-      
-    console.log(this.state);
+
+  //  console.log(this.state);
     if (this.state.redirect) {
       return <Redirect to="/"></Redirect>;
     }
@@ -73,7 +77,8 @@ export default class Signup extends Component {
           />
           <button>Sign up</button>
         </form>
-       <p> Already have an account? <a href="/login">Login</a></p>
+       <p> Already have an account? <Link to="/login">Login</Link></p>
+       {this.state.errorMsg}
       </div>
     );
   }

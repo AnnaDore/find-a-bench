@@ -22,19 +22,19 @@ export default class FinalDrawer extends Component {
 
 
   render() {
-     let sideDrawer;
+    let sideDrawer;
     let backdrop;
 
     if (this.state.sideDrawerOpen) {
       // sideDrawer = <SideDrawer show={this.state.sideDrawerOpen}/>
       backdrop = <Backrdrop click={this.backdropClickHandler} />
     }
-
+      console.log(this.props.user, "finalDrawer")
     return (
       <article className="drawer-container">
 
-        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
-        <SideDrawer  show={this.state.sideDrawerOpen} />
+        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} user={this.props.user}/>
+        <SideDrawer  show={this.state.sideDrawerOpen} user={this.props.user}/>
         {/* {sideDrawer} */}
         {backdrop}
       </article>
