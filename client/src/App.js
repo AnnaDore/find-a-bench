@@ -27,6 +27,7 @@ export default class App extends Component {
   }
 
   getTheUser = (user) => {
+    console.log(user, "getTheUser app.js")
     this.setState({
       loggedInUser: user,
     });
@@ -37,7 +38,7 @@ export default class App extends Component {
     return (
       <div>
      
-        <FinalDrawer user={this.state.loggedInUser}/>
+        <FinalDrawer getMyUser={this.getTheUser} user={this.state.loggedInUser}/>
       
         <main>
           <Switch>

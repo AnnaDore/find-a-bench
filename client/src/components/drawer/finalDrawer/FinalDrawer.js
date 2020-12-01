@@ -33,7 +33,7 @@ export default class FinalDrawer extends Component {
     return (
       <article className="drawer-container">
 
-        <Toolbar drawerClickHandler={this.drawerToggleClickHandler} user={this.props.user}/>
+        <Toolbar getMyUser={this.props.getMyUser} drawerClickHandler={this.drawerToggleClickHandler} user={this.props.user}/>
         <SideDrawer  show={this.state.sideDrawerOpen} user={this.props.user}/>
         {/* {sideDrawer} */}
         {backdrop}

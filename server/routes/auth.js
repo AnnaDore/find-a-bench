@@ -66,6 +66,8 @@ router.post('/login', async (req, res) => {
         const passwordCorrect = await bcrypt.compare(password, user.password)
         if (passwordCorrect) {
           req.session.user = user
+          console.log(user, "user")
+          console.log(req.session.user, "reqsesuse")
           res.status(200).json(user)
         } else {
             res
@@ -84,6 +86,8 @@ router.post('/login', async (req, res) => {
   })
 
   router.get('/loggedin', (req, res) => {
+    console.log('loggedin auth be')
+    console.log(req.session.user, "req.session.user")
     if (req.session.user) {
       res.status(200).json(req.session.user)
     } else {

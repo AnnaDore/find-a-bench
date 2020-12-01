@@ -28,6 +28,19 @@ mongoose
     console.error('Error connecting to mongo', err)
   });
 
+  // mongoose
+  // .connect('mongodb://localhost/find-a-bench',  {
+  //   useCreateIndex: true,
+  //    userNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  // })
+  // .then(x => {
+  //   console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+  // })
+  // .catch(err => {
+  //   console.error('Error connecting to mongo', err)
+  // });
+
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
@@ -38,16 +51,24 @@ const app = express();
 // Middleware Setup
 app.use(logger('dev'));
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true, 
-  cookie: { maxAge: 60000000000000000}, //=1 min
-  store: new Mongostore({
-    mongooseConnection: mongoose.connection,
+ app.use(session({
+//   secret: process.env.SESSION_SECRET,
+      secret: 'myspecialsecret',
+   resave: false,
+   saveUninitialized: true, 
+   cookie: { maxAge: 60000000000000000}, //=1 min
+   store: new Mongostore({
+     mongooseConnection: mongoose.connection,
     ttl: 60 * 60 * 24 // sec min h = day
-  })
-}))
+   })
+ }))
+
+// app.use(session({
+//   secret: 'myspecialsecret',
+//   store: new Mongostore({
+//     mongooseConnection: mongoose.connection
+//   })
+// }))
 
 app.use(cors({
   credentials: true,

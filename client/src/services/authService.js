@@ -19,15 +19,23 @@ class AuthService {
       .post("/auth/login", { email, password })
       .then((response) => response.data);
   };
+  
   loggedin = () => {
-    return this.service.get("/auth/loggedin").then((response) => response.data);
+    console.log('loggedin')
+    return this.service.get("/auth/loggedin")
+    .then((response) => response.data)
+    .catch(err => {
+      console.log(err)
+    })
+    
+
   };
   logout = () => {
     return this.service.get("/auth/logout").then((response) => response.data);
   };
-//   user = () => {
-//     return this.service.get("/user/:id").then((response) => response.data);
-//   }
+  //   user = () => {
+  //     return this.service.get("/user/:id").then((response) => response.data);
+  //   }
 }
 
 export default AuthService;

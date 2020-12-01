@@ -25,25 +25,29 @@ export default class Login extends Component {
     this.service
       .login(this.state.email, this.state.password)
       .then((user) => {
+        console.log(user, "handleFormSubmit login.js")
         this.props.getMyUser(user)
        // console.log(user)
         this.setState({
-          email: "",
-          password: "",
+          // email: "",
+          // password: "",
           redirect: true,
         });
       })
       .catch((err) => {
         console.log(err);
-        if (err) {
-          this.setState({
-            errorMsg: err.response.data.message,
-          });
-        } else {
-            this.setState({
-            errorMsg: "Email is invalid"
-          });
-        }
+        // this.setState({
+        //  errorMsg: err.response.data.message,
+         
+        // });
+        // if (err) {
+
+        // }
+        //  else {
+        //     this.setState({
+        //     errorMsg: "Email is invalid"
+        //   });
+        // }
       });
   };
 

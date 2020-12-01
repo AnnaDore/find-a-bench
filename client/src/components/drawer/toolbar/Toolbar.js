@@ -16,7 +16,7 @@ export default function Toolbar(props) {
         </div>
         <div className="space-between" />
         <div className="toolbar-navigation-item">
-        <ListOfBtns user={props.user}/>
+        <ListOfBtns getMyUser={props.getMyUser} user={props.user}/>
         
         </div>
       </nav>
