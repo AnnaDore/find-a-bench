@@ -12,7 +12,7 @@ export default function Toolbar(props) {
           <DrawerToggleButton click={props.drawerClickHandler} />
         </div>
         <div className="toolbar-logo">
-          <a href="/">DODO</a>
+          <a href="/">Find a bench!</a>
         </div>
         <div className="space-between" />
         <div className="toolbar-navigation-item">

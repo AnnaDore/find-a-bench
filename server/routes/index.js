@@ -6,4 +6,8 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+router.post('/', (req, res, next) => {
+  res.redirect('/test')
+})
+
 module.exports = router;
