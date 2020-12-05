@@ -16,7 +16,7 @@ const Mongostore = require('connect-mongo')(session)
 const cors = require('cors');
 
 mongoose
-  .connect('mongodb://localhost/find-a-bench',  {
+  .connect(process.env.MONGO_URI,  {
     useCreateIndex: true,
      userNewUrlParser: true,
     useUnifiedTopology: true,
@@ -52,23 +52,16 @@ const app = express();
 app.use(logger('dev'));
 
  app.use(session({
-//   secret: process.env.SESSION_SECRET,
-      secret: 'myspecialsecret',
-   resave: false,
-   saveUninitialized: true, 
-   cookie: { maxAge: 60000000000000000}, //=1 min
-   store: new Mongostore({
+ secret: process.env.SESSION_SECRET,
+    // resave: false,
+    // saveUninitialized: true, 
+    // cookie: { maxAge: 60000000000000000}, //=1 min
+    store: new Mongostore({
      mongooseConnection: mongoose.connection,
     ttl: 60 * 60 * 24 // sec min h = day
    })
  }))
 
-// app.use(session({
-//   secret: 'myspecialsecret',
-//   store: new Mongostore({
-//     mongooseConnection: mongoose.connection
-//   })
-// }))
 
 app.use(cors({
   credentials: true,
