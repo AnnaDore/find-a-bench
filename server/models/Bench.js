@@ -12,7 +12,11 @@ const benchSchema = new Schema({
   imageUrl: {
     type: String,
   },
-
+ // coordinates: [Array], 
+ // location: { type: { type: String },  },
+//  loc :  { type: {type:String}, coordinates: [Number]},
+ // location: { type: [String], index: { type: '2dsphere', sparse: true}},
+  location: {lat: String, lng: String },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
