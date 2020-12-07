@@ -4,11 +4,22 @@ const Bench = require("../models/Bench");
 const User = require("../models/User");
 
 /* GET home page */
+// router.get("/", (req, res, next) => {
+//   res.render("index");
+// });
+
 router.get("/", (req, res, next) => {
-  res.render("index");
+
+  Bench.find({})
+  .then(data => {
+    res.status(200).json(data)
+  })
+  .catch(err => {
+    console.log(err)
+  })
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/addBench", async (req, res, next) => {
   const { lat, lng } = req.body
  // console.log(location)
   try {

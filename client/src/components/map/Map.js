@@ -1,5 +1,7 @@
 import React from "react";
 import "./Map.css";
+import BenchService from '../../services/benchService'
+
 import {
   GoogleMap,
   useLoadScript,
@@ -37,7 +39,9 @@ const center = {
   lng: -79.3832,
 };
 
-export default function Map() {
+export default function Map(props) {
+  let service = new BenchService()
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -54,14 +58,28 @@ export default function Map() {
         time: new Date(),
       },
     ]);
-    submitHandler()
+    console.log(e.latLng.lat())
+    console.log(e.latLng.lng())
+    const loc = {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    }
+    submitHandler(loc)
   }, []);
 
-  const submitHandler = () => {
+
+
+  const submitHandler = (loc) => {
     console.log("marker");
+    service
+    .addBench(loc.lat, loc.lng)
+    .then(bench => {
+      console.log(bench, "bench")
+    })
   };
 
-
+  console.log(props.locationsBench, 'props in Map')
+  console.log(props.dodo, "test props")
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
