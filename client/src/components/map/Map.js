@@ -1,6 +1,9 @@
 import React from "react";
 import "./Map.css";
 import BenchService from '../../services/benchService'
+import { Switch, Route, Link } from "react-router-dom";
+import { useParams } from "react-router"
+import EditBench from "../../components/editBench/EditBench"
 
 import {
   GoogleMap,
@@ -23,6 +26,7 @@ import { formatRelative } from "date-fns";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "./mapStyles";
+//import EditBench from "../editBench/EditBench";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -38,6 +42,11 @@ const center = {
   lat: 43.6532,
   lng: -79.3832,
 };
+
+// function EditBenchData() {
+//   let { id } = useParams()
+//   return <EditBench props={id} />
+// }
 
 export default function Map(props) {
   let service = new BenchService()
@@ -78,8 +87,7 @@ export default function Map(props) {
     })
   };
 
-  console.log(props.locationsBench, 'props in Map')
-  console.log(props.dodo, "test props")
+
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -95,6 +103,8 @@ export default function Map(props) {
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
+  console.log(props.locationsBench, 'props in Map')
+  console.log(props.dodo, "test props")
 
   return (
     <div>
@@ -147,6 +157,12 @@ export default function Map(props) {
                 </span> Alert
               </h2>
               <p>Spotted {formatRelative(selected.time, new Date())}</p>
+             
+              {/* <Switch>
+              <Route exact path="/bench/edit/:id" component={EditBench} >Edit</Route>
+              </Switch> */}
+             
+              <Link to="/bench/edit/:id" component={EditBench}>Edit</Link>
             </div>
           </InfoWindow>
         )}

@@ -24,6 +24,14 @@ class BenchService {
         .then(console.log('all bench service'))
     }
 
+    // editBenchGet = data => {
+    //     return this.service
+    //     .get("/bench/edit/:id", { data })
+    //     .then(response => response.data)
+    //     .then(console.log('edit behcng get service'))
+       
+    // }
+
 }
 
 export default BenchService

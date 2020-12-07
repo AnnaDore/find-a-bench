@@ -41,4 +41,15 @@ router.post("/addBench", async (req, res, next) => {
 
 });
 
+router.get("/bench/edit/:id", (req, res, next) => {
+  Bench.findById(req.params.id)
+  .then(data => {
+    res.status(200).json(data)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({ message: 'Something went wrong' })
+  })
+})
+
 module.exports = router;
