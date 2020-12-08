@@ -7,6 +7,8 @@ import Map from "./components/map/Map";
 import FinalDrawer from "./components/drawer/finalDrawer/FinalDrawer";
 import Signup from "./components/auth/signup/Signup";
 import Login from "./components/auth/login/Login";
+import Profile from "../src/components/profile/Profile";
+import EditBench from "./components/editBench/EditBench";
 
 export default class App extends Component {
   state = {
@@ -35,7 +37,7 @@ export default class App extends Component {
       .allBenches()
       .then((data) => {
         console.log(data[0].location, "all benches react");
-
+        console.log(data);
         // let benchesArray = []
         // for (let i = 0; i <= data.length; i++) {
         //     benchesArray.push(data[i].location)
@@ -107,6 +109,13 @@ export default class App extends Component {
               path="/login"
               render={() => <Login getMyUser={this.getTheUser} />}
             />
+            <Route
+              exact
+              path="/profile/:id"
+              render={() => <Profile getMyUser={this.getTheUser} user={this.state.loggedInUser} />}
+
+            />
+            <Route exact path="/bench/edit/:id" component={EditBench} />
           </Switch>
         </main>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 import AuthService from "../../../services/authService";
+import Profile from "../../profile/Profile"
 
 export default class ListOfBtns extends Component {
     state = {
@@ -32,7 +33,7 @@ export default class ListOfBtns extends Component {
             btnsLoggedInOut = (
               <ul>
                 <li>
-                  <Link to="/">{this.props.user.username}</Link>
+                  <Link to={`/profile/${this.props.user._id}`} >{this.props.user.username}</Link>
                 </li>
                 <li>
                   <p onClick={this.logout}>Logout</p>

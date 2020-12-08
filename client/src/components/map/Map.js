@@ -162,7 +162,7 @@ export default function Map(props) {
               <Route exact path="/bench/edit/:id" component={EditBench} >Edit</Route>
               </Switch> */}
              
-              <Link to="/bench/edit/:id" component={EditBench}>Edit</Link>
+              {/* <Link to={`/bench/edit/${match.params.id}`} component={EditBench}>Edit</Link> */}
             </div>
           </InfoWindow>
         )}

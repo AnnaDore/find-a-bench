@@ -52,4 +52,20 @@ router.get("/bench/edit/:id", (req, res, next) => {
   })
 })
 
+router.get('/profile/:id', (req, res, next) => {
+  //res.status(200).json(req.params)
+  const { id } = req.params.id
+  User.find(id)
+  .then(data => {
+    console.log(data)
+    res.status(200).json(data)
+  })
+  .catch(err => {
+    console.log(err)
+    res
+        .status(400)
+        .json({ message: 'there is no user' })
+  })
+})
+
 module.exports = router;
