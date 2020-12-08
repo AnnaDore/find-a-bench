@@ -103,8 +103,9 @@ export default function Map(props) {
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
-  console.log(props.locationsBench, 'props in Map')
-  console.log(props.dodo, "test props")
+
+  console.log(props)
+  console.log(markers)
 
   return (
     <div>
@@ -123,11 +124,17 @@ export default function Map(props) {
        onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+      {/* {props.benches.map((marker) => {
+        console.log(marker)
+      })} */}
+        {props.benches.map((marker) => (
+          
           //  <form onSubmit={submitHandler}>
           <Marker
-            key={`${marker.lat}-${marker.lng}`}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            // key={`${marker.lat}-${marker.lng}`}
+            key={marker._id}
+             position={{  lat: Number( marker.location.lat), lng: Number(marker.location.lng )}}
+          //  position={{  lat: 58.26625984910455, lng: -136.13453987657067}}
              onClick={() => setSelected(marker)}
             icon={{
               url: `/bench.png`,
@@ -141,7 +148,9 @@ export default function Map(props) {
 
         {selected && (
           <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+          // position={{ lat: selected.lat, lng: selected.lng }}
+          position={{  lat: Number( selected.location.lat), lng: Number(selected.location.lng )}}
+          //  position={{  lat: 58.26625984910455, lng: -136.13453987657067 }}
             onCloseClick={() => {
               setSelected(null);
             }}
@@ -154,9 +163,11 @@ export default function Map(props) {
                     src="/bench.png"
                     alt="bench-is-here"
                   />
-                </span> Alert
+                   <Link to={`/bench/edit/${selected._id}`} >Edit</Link>
+                </span>  
+                {/* <Link to={`/bench/edit/:id`} >Edit</Link> */}
               </h2>
-              <p>Spotted {formatRelative(selected.time, new Date())}</p>
+              {/* <p>Spotted {formatRelative(selected.time, new Date())}</p> */}
              
               {/* <Switch>
               <Route exact path="/bench/edit/:id" component={EditBench} >Edit</Route>

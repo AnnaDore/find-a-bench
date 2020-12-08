@@ -9,6 +9,7 @@ export default class EditBench extends Component {
 
     allBenches = new BenchService()
 
+    
     componentDidMount = () => {
         // this.allBenches.editBenchGet()
         // .then(data => {

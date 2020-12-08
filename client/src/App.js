@@ -75,6 +75,7 @@ export default class App extends Component {
 
   render() {
     console.log(this.state, "App.js");
+    console.log(this.state.allBenches)
     // if (this.state.bench) {
     //   let locBenches =     this.state.allBenches.map(item => {
     //     return item.location
@@ -102,7 +103,7 @@ export default class App extends Component {
               //  <Route exact path="/" render={(props) => <Map {...props} dodo="dodo" locationsBench={item.location}  /> }  />
               //  <Route exact path="/" render={() => <Map  /> } />
             })}
-            <Route exact path="/" component={Map} />
+            {/* <Route exact path="/" component={Map} /> */}
             <Route exact path="/signup" component={Signup} />
             <Route
               exact
@@ -111,11 +112,24 @@ export default class App extends Component {
             />
             <Route
               exact
-              path="/profile/:id"
-              render={() => <Profile getMyUser={this.getTheUser} user={this.state.loggedInUser} />}
-
+              path="/"
+              render={() => <Map benches={this.state.allBenches} />}
             />
-            <Route exact path="/bench/edit/:id" component={EditBench} />
+            <Route
+              exact
+              path="/profile/:id"
+              render={() => (
+                <Profile
+                  getMyUser={this.getTheUser}
+                  user={this.state.loggedInUser}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/bench/edit/:id"
+              render={() => <EditBench  />}
+            />
           </Switch>
         </main>
       </div>
