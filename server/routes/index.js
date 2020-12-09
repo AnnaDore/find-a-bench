@@ -61,7 +61,10 @@ router.get('/profile/:id', (req, res, next) => {
 
 router.get("/bench/:id", (req, res, next) => {
   console.log(req.params.id, "route params index.js")
-  Bench.findById(req.params.id)
+  const { id } = req.params.id
+  console.log(id, "route params index.js")
+  // Bench.find(id)
+  Bench.findOne(id)
   .then(data => {
     res.status(200).json(data)
   })

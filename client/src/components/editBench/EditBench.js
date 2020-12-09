@@ -2,53 +2,56 @@ import React, { Component } from "react";
 import BenchService from "../../services/benchService";
 
 export default class EditBench extends Component {
-//   constructor(props) {
-//     super(props);
-    
-//     this.state = {
-//       id: this.props.match.params.id,
-//       bench: null
-//     };
-//     allBenches = new BenchService();
-//   }
+
   state = {
     id: this.props.match.params.id,
-    bench: null
+    bench: null,
   };
+
   allBenches = new BenchService();
- 
 
- 
-
-  giveMeBench = (id) => {
-    console.log("did mount")
+  giveMeBench = () => {
+    console.log("did mount");
+    console.log(this.props.match.params.id)
     this.allBenches
-    //  .oneBenchGet(this.state.id)
-    .oneBenchGet(this.state.id)
+      .oneBenchGet(this.props.match.params.id)
       .then((data) => {
         console.log(data);
         this.setState({
-            bench: data
-        })
+          bench: data,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   componentDidMount = () => {
-    this.giveMeBench(this.state.id)
+    this.giveMeBench();
   };
 
   render() {
     console.log(this.props);
-  console.log(this.state.bench)
+    console.log(this.state.bench);
+    console.log(this.props.match.params.id)
+    if (this.state.bench < 1) {
+        return <h2>Loading...</h2>;
+      }
+    return (
+      <div>
+        {/* <p>{this.state.id}</p> */}
+        {/* {this.state.bench.location.map(item => (
+             <p>{item.lat}</p>
+        )
+            
+        )} */}
+        <h4>Add more information</h4>
+      <p>Latitude is: {this.state.bench.location.lat}</p>
+      <p>Langtitue is: {this.state.bench.location.lng} </p>
 
-    return <div>
-        <p>{this.state.id}</p>
-       
         {/* <p>{this.state.bench}</p> */}
-    </div>;
+      </div>
+    );
   }
 }
 

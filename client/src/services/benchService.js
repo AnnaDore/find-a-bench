@@ -35,7 +35,7 @@ class BenchService {
     return this.service
       .get("/bench/:id", { id })
       .then((response) => response.data)
-      .then(console.log("edit behcng get service"));
+      .then(console.log("one behcng get service"));
   };
 }
 
