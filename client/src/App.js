@@ -32,17 +32,14 @@ export default class App extends Component {
       });
   };
 
+
   getAllBenches = () => {
     this.allBenches
       .allBenches()
       .then((data) => {
-        console.log(data[0].location, "all benches react");
-        console.log(data);
-        // let benchesArray = []
-        // for (let i = 0; i <= data.length; i++) {
-        //     benchesArray.push(data[i].location)
-        // }
-        // console.log(benchesArray, "benchesArray")
+       // console.log(data[0].location, "all benches react");
+      //  console.log(data);
+       
         this.setState({
           allBenches: data,
         });
@@ -53,17 +50,9 @@ export default class App extends Component {
   };
 
   componentDidMount = () => {
-    // this.service.loggedin()
-    // .then(user => {
-    //   this.setState({
-    //     loggedInUser: user
-    //   })
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
     this.checkUserLoggedIn();
     this.getAllBenches();
+   
   };
 
   getTheUser = (user) => {
@@ -73,18 +62,11 @@ export default class App extends Component {
     });
   };
 
+
   render() {
-    console.log(this.state, "App.js");
-    console.log(this.state.allBenches)
-    // if (this.state.bench) {
-    //   let locBenches =     this.state.allBenches.map(item => {
-    //     return item.location
-    //   })
-    //   console.log(locBenches)
-    //   this.setState({
-    //     allBenches: locBenches
-    //   })
-    // }
+ //   console.log(this.state, "App.js");
+ //   console.log(this.state.allBenches)
+
     if (this.state.allBenches < 1) {
       return <h2>Loading...</h2>;
     }
@@ -97,13 +79,7 @@ export default class App extends Component {
 
         <main>
           <Switch>
-            {this.state.allBenches.map((item) => {
-              //
-              // <Route exact path="/" component={Map}  props={item} />
-              //  <Route exact path="/" render={(props) => <Map {...props} dodo="dodo" locationsBench={item.location}  /> }  />
-              //  <Route exact path="/" render={() => <Map  /> } />
-            })}
-            {/* <Route exact path="/" component={Map} /> */}
+           
             <Route exact path="/signup" component={Signup} />
             <Route
               exact
@@ -127,8 +103,8 @@ export default class App extends Component {
             />
             <Route
               exact
-              path="/bench/edit/:id"
-              render={() => <EditBench  />}
+              path="/bench/:id"
+              render={(props) => <EditBench {...props}  />}
             />
           </Switch>
         </main>

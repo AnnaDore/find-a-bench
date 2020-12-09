@@ -104,8 +104,9 @@ export default function Map(props) {
   if (!isLoaded) return "Loading...";
 
 
-  console.log(props)
-  console.log(markers)
+ // console.log(props)
+ // console.log(markers)
+ console.log(selected)
 
   return (
     <div>
@@ -163,17 +164,18 @@ export default function Map(props) {
                     src="/bench.png"
                     alt="bench-is-here"
                   />
-                   <Link to={`/bench/edit/${selected._id}`} >Edit</Link>
+                   <Link to={`/bench/${selected._id}` } >Open</Link>
                 </span>  
-                {/* <Link to={`/bench/edit/:id`} >Edit</Link> */}
+               
               </h2>
-              {/* <p>Spotted {formatRelative(selected.time, new Date())}</p> */}
-             
-              {/* <Switch>
-              <Route exact path="/bench/edit/:id" component={EditBench} >Edit</Route>
-              </Switch> */}
-             
-              {/* <Link to={`/bench/edit/${match.params.id}`} component={EditBench}>Edit</Link> */}
+              
+              {/* <Route
+              exact
+              path="/bench/:id"
+              render={() => <EditBench test={selected} />}
+            /> */}
+              
+
             </div>
           </InfoWindow>
         )}

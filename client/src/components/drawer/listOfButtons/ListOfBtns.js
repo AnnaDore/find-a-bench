@@ -13,7 +13,7 @@ export default class ListOfBtns extends Component {
       
       this.service.logout()
       .then(response => {
-         console.log(response, 'logout')
+       //  console.log(response, 'logout')
          this.props.getMyUser(null)
          this.setState({
              redirect: true
@@ -48,7 +48,7 @@ export default class ListOfBtns extends Component {
             </ul>)
           }
     
-          console.log(this.props)
+      //    console.log(this.props)
         return (
             <div>
                    {btnsLoggedInOut}

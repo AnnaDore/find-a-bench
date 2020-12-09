@@ -23,19 +23,19 @@ class BenchService {
       .then(console.log("all bench service"));
   };
 
-  editBenchGet = data => {
-      return this.service
-      .get("/bench/edit/:id", { data })
-      .then(response => response.data)
-      .then(console.log('edit behcng get service'))
-
-  }
-
   userProfile = (data) => {
     return this.service
       .get("/profile/:id", { data })
       .then((response) => response.data)
-      .them(console.log("service profile data"));
+      .then(console.log("service profile data"));
+  };
+
+  oneBenchGet = (id) => {
+    // console.log(id, "bench service")
+    return this.service
+      .get("/bench/:id", { id })
+      .then((response) => response.data)
+      .then(console.log("edit behcng get service"));
   };
 }
 

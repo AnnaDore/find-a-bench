@@ -19,16 +19,15 @@ class AuthService {
       .post("/auth/login", { email, password })
       .then((response) => response.data);
   };
-  
-  loggedin = () => {
-    console.log('loggedin')
-    return this.service.get("/auth/loggedin")
-    .then((response) => response.data)
-    .catch(err => {
-      console.log(err)
-    })
-    
 
+  loggedin = () => {
+    console.log("loggedin");
+    return this.service
+      .get("/auth/loggedin")
+      .then((response) => response.data)
+      .catch((err) => {
+        console.log(err);
+      });
   };
   logout = () => {
     return this.service.get("/auth/logout").then((response) => response.data);

@@ -41,7 +41,26 @@ router.post("/addBench", async (req, res, next) => {
 
 });
 
-router.get("/bench/edit/:id", (req, res, next) => {
+
+
+router.get('/profile/:id', (req, res, next) => {
+  //res.status(200).json(req.params)
+  const { id } = req.params.id
+  User.find(id)
+  .then(data => {
+   // console.log(data)
+    res.status(200).json(data)
+  })
+  .catch(err => {
+    console.log(err)
+    res
+        .status(400)
+        .json({ message: 'there is no user' })
+  })
+})
+
+router.get("/bench/:id", (req, res, next) => {
+  console.log(req.params.id, "route params index.js")
   Bench.findById(req.params.id)
   .then(data => {
     res.status(200).json(data)
@@ -52,20 +71,5 @@ router.get("/bench/edit/:id", (req, res, next) => {
   })
 })
 
-router.get('/profile/:id', (req, res, next) => {
-  //res.status(200).json(req.params)
-  const { id } = req.params.id
-  User.find(id)
-  .then(data => {
-    console.log(data)
-    res.status(200).json(data)
-  })
-  .catch(err => {
-    console.log(err)
-    res
-        .status(400)
-        .json({ message: 'there is no user' })
-  })
-})
 
 module.exports = router;

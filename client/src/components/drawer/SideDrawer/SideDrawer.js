@@ -10,7 +10,7 @@ export default function SideDrawer(props) {
     drawerClasses = 'side-drawer open'
   }
  
-  console.log(props, "sideDrawer")
+//  console.log(props, "sideDrawer")
     return (
         <nav className={drawerClasses}>
          <ListOfBtns user={props.user}/>

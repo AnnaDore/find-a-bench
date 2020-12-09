@@ -4,7 +4,7 @@ import "./Toolbar.css";
 import ListOfBtns from "../listOfButtons/ListOfBtns"
 
 export default function Toolbar(props) {
-  console.log(props, "Toolbar");
+ // console.log(props, "Toolbar");
   return (
     <header className="toolbar">
       <nav className="toolbar-navigation">
