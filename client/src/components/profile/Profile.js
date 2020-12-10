@@ -7,6 +7,7 @@ export default function Profile(props) {
       <p>User profile is here</p>
       <p>User profile is here</p>
       <p>{props.user.username}</p>
+      <p>{props.user.benches}</p>
     </div>
   );
 }

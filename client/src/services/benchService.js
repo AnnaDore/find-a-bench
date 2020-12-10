@@ -23,9 +23,9 @@ class BenchService {
       .then(console.log("all bench service"));
   };
 
-  userProfile = (data) => {
+  userProfile = (data, id) => {
     return this.service
-      .get("/profile/:id", { data })
+      .get(`/profile/${id}`, { data })
       .then((response) => response.data)
       .then(console.log("service profile data"));
   };
@@ -33,7 +33,7 @@ class BenchService {
   oneBenchGet = (id) => {
     // console.log(id, "bench service")
     return this.service
-      .get("/bench/:id", { id })
+      .get(`/bench/${id}`)
       .then((response) => response.data)
       .then(console.log("one behcng get service"));
   };
@@ -42,6 +42,13 @@ class BenchService {
       return this.service.post('/bench/:id/benchAvatar', image)
       .then((response) => response.data)
       .then(console.log("upload image service"));
+  }
+
+  editBench = ( description, imageUrl, location, creator, id ) => {
+    return this.service.post(`/bench/${id}/edit`, 
+    {  description, imageUrl, location, creator })
+    .then(response => response.data)
+    .then(console.log('edit service post'))
   }
 }
 

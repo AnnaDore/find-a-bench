@@ -69,27 +69,6 @@ router.get("/bench/:id", (req, res, next) => {
     });
 });
 
-// router.post(
-//   "/bench/:id/benchAvatar",
-//   upload.single("benchAvatar"),
-//   (req, res, next) => {
-//     const { id } = req.params.id;
-//     const { avatarPath } = req.body;
-//     // if(!req.session.user) {
-//     //   res.status(401).json({ message: 'User not found' })
-//     // }
-
-//     Bench.updateOne({ id: id }, { imageUrl: req.file.filename })
-//       .then((data) => {
-//         res.status(200).json(data);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         res.status(500).json({ message: "Something went wrong" });
-//       });
-//   }
-// );
-
 router.post(
   "/bench/:id/benchAvatar",
   uploadCloud.single("benchAvatar"),
@@ -113,8 +92,13 @@ router.post(
 
 router.post('/bench/:id/edit', async (req, res, next) => {
   const { description, imageUrl, location } = req.body
-  const benchDoc = await Bench.findByIdAndUpdate(
-    {_id: req.params.id}, 
+  console.log(req.body, "req.body BE")
+ 
+  const { id } = req.params;
+  console.log(id, "id be")
+  console.log(req.session.user, "user")
+  const benchDoc = await Bench.findOneAndUpdate(
+    {_id: id}, 
     { $set: {
       description: description, 
       imageUrl: imageUrl, 
@@ -122,12 +106,27 @@ router.post('/bench/:id/edit', async (req, res, next) => {
       creator: req.session.user._id
     }}, 
     {new: true}
-  
     )
-    .then(() => {
-      res.redirect('/bench/' + req.params.id)
-    })
+    console.log(benchDoc, "edit be")
+
+    await User.findOneAndUpdate(
+      { _id: req.session.user._id },
+      { $push: { benches: benchDoc._id } }
+    );
+     //  res.status(200).json(data);
+      
+
+    // .then((data) => {
+    //   res.status(200).json(data);
+    //   console.log(data, "edit be")
+    //   console.log(req.session.user, "user")
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    //   res.status(500).json({ message: "Something went wrong" });
+    // });
 })
+
 
 
 module.exports = router;

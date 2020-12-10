@@ -7,6 +7,9 @@ export default class EditBench extends Component {
   state = {
     id: this.props.match.params.id,
     bench: null,
+    description: "",
+    imageUrl: "",
+    location: {lat: null, lng: null}
   };
 
   allBenches = new BenchService();
@@ -29,9 +32,9 @@ export default class EditBench extends Component {
 
   handleFileUpload = (e) => {
     //e.target.files[0]
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     const uploadData = new FormData();
-    console.log(uploadData)
+    console.log(uploadData);
     uploadData.append("benchAvatar", e.target.files[0]);
     this.allBenches.imageUpload(uploadData);
   };
@@ -40,10 +43,44 @@ export default class EditBench extends Component {
     this.giveMeBench();
   };
 
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    this.allBenches
+      .editBench(
+        this.state.description,
+        this.state.imageUrl,
+        this.state.location, 
+        this.props.user._id,
+        this.state.id
+      )
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          description: "",
+          imageUrl: "",
+          location: "",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+    console.log(this.state);
+  };
+
   render() {
-    // console.log(this.props);
-    // console.log(this.state.bench);
+     console.log(this.props.user);
+     console.log(this.state.bench);
     // console.log(this.props.match.params.id);
+    console.log(this.state.description, 'descr')
+    console.log(this.state.imageUrl, 'imageUrl')
+    console.log(this.state.location, 'loco')
     if (this.state.bench < 1) {
       return <h2>Loading...</h2>;
     }
@@ -56,22 +93,35 @@ export default class EditBench extends Component {
             
         )} */}
         <h4>Add more information</h4>
-        <p>Latitude is:</p> <input value={this.state.bench.location.lat} />
-        <p>Langtitue is: </p> <input value={this.state.bench.location.lat} />
-        <p>Put the description: </p>
-        <input
-          placeholder="Did you like this bench?"
-          value={this.state.bench.description}
-        />
-        <br/>
-         <input
+        <form onSubmit={this.handleFormSubmit}>
+          <label>Latitude is:</label>{" "}
+          <input
+            name="location"
+            placeholder={this.state.bench.location.lat}
+            onChange={this.handleChange}
+          />
+          <label>Langtitue is: </label>{" "}
+          <input
+            name="location"
+            value={this.state.bench.location.lng}
+            onChange={this.handleChange}
+          />
+          <p>Put the description: </p>
+          <input
+            placeholder="Did you like this bench?"
+            name="description"
+            value={this.state.bench.description}
+            onChange={this.handleChange}
+          />
+          <br />
+          <input
             type="file"
             name="benchAvatar"
             onChange={(e) => this.handleFileUpload(e)}
           />
-        
+          <button>Edit bench!</button>
+        </form>
       </div>
     );
   }
 }
-

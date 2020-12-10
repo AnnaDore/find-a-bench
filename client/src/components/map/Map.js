@@ -57,6 +57,7 @@ export default function Map(props) {
   });
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
+  const [mapBenches, setMapBenches] = React.useState(props.benches)
 
   const onMapClick = React.useCallback((e) => {
     setMarkers((current) => [
@@ -83,10 +84,14 @@ export default function Map(props) {
     service
     .addBench(loc.lat, loc.lng)
     .then(bench => {
+     // setMarkers(...markers, {lat: loc.lat, lng: loc.lng})
       console.log(bench, "bench")
+      setMapBenches([...mapBenches, bench])
     })
+    
   };
 
+  console.log(markers, "markers")
 
 
   const mapRef = React.useRef();
@@ -128,8 +133,8 @@ export default function Map(props) {
       {/* {props.benches.map((marker) => {
         console.log(marker)
       })} */}
-        {props.benches.map((marker) => (
-          
+    
+          {mapBenches.map((marker) => (
           //  <form onSubmit={submitHandler}>
           <Marker
             // key={`${marker.lat}-${marker.lng}`}

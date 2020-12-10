@@ -104,7 +104,7 @@ export default class App extends Component {
             <Route
               exact
               path="/bench/:id"
-              render={(props) => <EditBench {...props}  />}
+              render={(props) => <EditBench {...props} user={this.state.loggedInUser}/>}
             />
           </Switch>
         </main>
