@@ -164,7 +164,7 @@ export default function Map(props) {
                     src="/bench.png"
                     alt="bench-is-here"
                   />
-                   <Link to={`/bench/${selected._id}` } >Open</Link>
+                   <Link to={`/bench/${selected._id}` } >Edit</Link>
                 </span>  
                
               </h2>

@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer')
+const upload = multer({dest: 'public/uploads/'})
 const Bench = require("../models/Bench");
 const User = require("../models/User");
 
@@ -46,7 +48,7 @@ router.post("/addBench", async (req, res, next) => {
 router.get('/profile/:id', (req, res, next) => {
   //res.status(200).json(req.params)
   const { id } = req.params.id
-  User.find(id)
+  User.findOne(id)
   .then(data => {
    // console.log(data)
     res.status(200).json(data)
@@ -72,6 +74,23 @@ router.get("/bench/:id", (req, res, next) => {
     console.log(err)
     res.status(500).json({ message: 'Something went wrong' })
   })
+})
+
+router.post('/bench/:id/benchAvatar', upload.single('benchAvatar'), (req, res, next) => {
+  const { id } = req.params.id
+  // if(!req.session.user) {
+  //   res.status(401).json({ message: 'User not found' })
+  // }
+  
+    Bench.updateOne({id: id}, {imageUrl: req.file.filename})
+    .then(data => {
+      res.status(200).json(data)
+    })
+    .catch(err => {
+      console.log(err)
+    res.status(500).json({ message: 'Something went wrong' })
+    })
+  
 })
 
 

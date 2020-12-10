@@ -37,6 +37,12 @@ class BenchService {
       .then((response) => response.data)
       .then(console.log("one behcng get service"));
   };
+
+  imageUpload = (image) => {
+      return this.service.post('/bench/:id/benchAvatar', image)
+      .then((response) => response.data)
+      .then(console.log("upload image service"));
+  }
 }
 
 export default BenchService;
