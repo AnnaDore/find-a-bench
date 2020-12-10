@@ -9,9 +9,9 @@ class BenchService {
     this.service = service;
   }
 
-  addBench = (lat, lng) => {
+  addBench = (lat, lng, creator) => {
     return this.service
-      .post("/addBench", { lat, lng })
+      .post("/addBench", { lat, lng, creator })
       .then((response) => response.data)
       .then(console.log("bench service"));
   };
@@ -23,9 +23,9 @@ class BenchService {
       .then(console.log("all bench service"));
   };
 
-  userProfile = (data, id) => {
+  userProfile = (id) => {
     return this.service
-      .get(`/profile/${id}`, { data })
+      .get(`/profile/${id}`)
       .then((response) => response.data)
       .then(console.log("service profile data"));
   };

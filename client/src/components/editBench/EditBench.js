@@ -15,8 +15,8 @@ export default class EditBench extends Component {
   allBenches = new BenchService();
 
   giveMeBench = () => {
-    console.log("did mount");
-    console.log(this.props.match.params.id);
+  //  console.log("did mount");
+  //  console.log(this.props.match.params.id);
     this.allBenches
       .oneBenchGet(this.props.match.params.id)
       .then((data) => {
@@ -32,7 +32,7 @@ export default class EditBench extends Component {
 
   handleFileUpload = (e) => {
     //e.target.files[0]
-    console.log(e.target.files[0]);
+   // console.log(e.target.files[0]);
     const uploadData = new FormData();
     console.log(uploadData);
     uploadData.append("benchAvatar", e.target.files[0]);
@@ -71,16 +71,16 @@ export default class EditBench extends Component {
     this.setState({
       [name]: value,
     });
-    console.log(this.state);
+   // console.log(this.state);
   };
 
   render() {
-     console.log(this.props.user);
-     console.log(this.state.bench);
-    // console.log(this.props.match.params.id);
-    console.log(this.state.description, 'descr')
-    console.log(this.state.imageUrl, 'imageUrl')
-    console.log(this.state.location, 'loco')
+    //  console.log(this.props.user);
+    //  console.log(this.state.bench);
+    //  console.log(this.props.match.params.id);
+    // console.log(this.state.description, 'descr')
+    // console.log(this.state.imageUrl, 'imageUrl')
+    // console.log(this.state.location, 'loco')
     if (this.state.bench < 1) {
       return <h2>Loading...</h2>;
     }

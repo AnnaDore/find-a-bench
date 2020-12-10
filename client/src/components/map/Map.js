@@ -1,7 +1,7 @@
 import React from "react";
 import "./Map.css";
 import BenchService from '../../services/benchService'
-import { Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router"
 import EditBench from "../../components/editBench/EditBench"
 
@@ -80,7 +80,7 @@ export default function Map(props) {
 
 
   const submitHandler = (loc) => {
-    console.log("marker");
+   
     service
     .addBench(loc.lat, loc.lng)
     .then(bench => {
@@ -91,7 +91,7 @@ export default function Map(props) {
     
   };
 
-  console.log(markers, "markers")
+ // console.log(markers, "markers")
 
 
   const mapRef = React.useRef();
@@ -130,9 +130,7 @@ export default function Map(props) {
        onClick={onMapClick}
         onLoad={onMapLoad}
       >
-      {/* {props.benches.map((marker) => {
-        console.log(marker)
-      })} */}
+
     
           {mapBenches.map((marker) => (
           //  <form onSubmit={submitHandler}>

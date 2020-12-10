@@ -97,7 +97,7 @@ export default class App extends Component {
               render={() => (
                 <Profile
                   getMyUser={this.getTheUser}
-                  user={this.state.loggedInUser}
+                  user={this.state.loggedInUser} 
                 />
               )}
             />

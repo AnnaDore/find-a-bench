@@ -30,7 +30,12 @@ router.post("/addBench", async (req, res, next) => {
         lat: lat,
         lng,
       },
+      creator: req.session.user._id
     });
+    await User.findOneAndUpdate(
+      { _id: req.session.user._id },
+      { $push: { benches: bench._id } }
+    );
     // req.session.user = user
     res.status(200).json(bench);
     return;
@@ -44,8 +49,9 @@ router.get("/profile/:id", (req, res, next) => {
   //res.status(200).json(req.params)
   const { id } = req.params.id;
   User.findOne(id)
+  .populate("benches")
     .then((data) => {
-      // console.log(data)
+      console.log(data, "user")
       res.status(200).json(data);
     })
     .catch((err) => {
@@ -80,6 +86,7 @@ router.post(
     // }
 
     Bench.updateOne({ id: id }, { imageUrl: req.file.path })
+
       .then((data) => {
         res.status(200).json(data);
       })
@@ -97,22 +104,28 @@ router.post('/bench/:id/edit', async (req, res, next) => {
   const { id } = req.params;
   console.log(id, "id be")
   console.log(req.session.user, "user")
-  const benchDoc = await Bench.findOneAndUpdate(
-    {_id: id}, 
-    { $set: {
-      description: description, 
-      imageUrl: imageUrl, 
-      location: location, 
-      creator: req.session.user._id
-    }}, 
-    {new: true}
-    )
-    console.log(benchDoc, "edit be")
+  try {
+    const benchDoc = await Bench.findOneAndUpdate(
+      {_id: id}, 
+      { $set: {
+        description: description, 
+        imageUrl: imageUrl, 
+        location: location, 
+        creator: req.session.user._id
+      }}, 
+      {new: true}
+      )
+      console.log(benchDoc, "edit be")
+  }
 
-    await User.findOneAndUpdate(
-      { _id: req.session.user._id },
-      { $push: { benches: benchDoc._id } }
-    );
+  catch (err) {
+    console.log(err)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+    // await User.findOneAndUpdate(
+    //   { _id: req.session.user._id },
+    //   { $push: { benches: benchDoc._id } }
+    // );
      //  res.status(200).json(data);
       
 
