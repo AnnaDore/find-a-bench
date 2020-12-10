@@ -95,7 +95,7 @@ router.post(
   uploadCloud.single("benchAvatar"),
   (req, res, next) => {
     const { id } = req.params.id;
-    const { avatarPath } = req.body;
+
     // if(!req.session.user) {
     //   res.status(401).json({ message: 'User not found' })
     // }
@@ -110,6 +110,24 @@ router.post(
       });
   }
 );
+
+router.post('/bench/:id/edit', async (req, res, next) => {
+  const { description, imageUrl, location } = req.body
+  const benchDoc = await Bench.findByIdAndUpdate(
+    {_id: req.params.id}, 
+    { $set: {
+      description: description, 
+      imageUrl: imageUrl, 
+      location: location, 
+      creator: req.session.user._id
+    }}, 
+    {new: true}
+  
+    )
+    .then(() => {
+      res.redirect('/bench/' + req.params.id)
+    })
+})
 
 
 module.exports = router;
