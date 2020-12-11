@@ -30,6 +30,7 @@ router.post("/addBench", async (req, res, next) => {
         lat: lat,
         lng,
       },
+
       creator: req.session.user._id
     });
     await User.findOneAndUpdate(
@@ -61,13 +62,15 @@ router.get("/profile/:id", (req, res, next) => {
 });
 
 router.get("/bench/:id", (req, res, next) => {
-  console.log(req.params.id, "route params index.js");
-  const { id } = req.params.id;
+  console.log(req.params.id, "route params.id index.js");
+  console.log(req.params, "route params index.js");
+  const { id } = req.params;
   console.log(id, "route params index.js");
   // Bench.find(id)
-  Bench.findOne(id)
+  Bench.findOne({_id: id})
     .then((data) => {
       res.status(200).json(data);
+      console.log(data)
     })
     .catch((err) => {
       console.log(err);
@@ -111,7 +114,7 @@ router.post('/bench/:id/edit', async (req, res, next) => {
         description: description, 
         imageUrl: imageUrl, 
         location: location, 
-        creator: req.session.user._id
+        creator: req.session.user.id
       }}, 
       {new: true}
       )

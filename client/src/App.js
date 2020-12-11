@@ -63,12 +63,15 @@ export default class App extends Component {
     });
   };
 
+  
+
   render() {
     //   console.log(this.state, "App.js");
     //   console.log(this.state.allBenches)
 
     if (this.state.allBenches < 1) {
       return <h2>Loading...</h2>;
+
     }
     return (
       <div>
