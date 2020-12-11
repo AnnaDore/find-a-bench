@@ -169,16 +169,8 @@ export default function Map(props) {
                   />
                    <Link to={`/bench/${selected._id}` } >Edit</Link>
                 </span>  
-               
+    
               </h2>
-              
-              {/* <Route
-              exact
-              path="/bench/:id"
-              render={() => <EditBench test={selected} />}
-            /> */}
-              
-
             </div>
           </InfoWindow>
         )}

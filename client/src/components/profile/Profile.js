@@ -7,7 +7,7 @@ export default function Profile(user) {
    console.log(user)
 
 
-  const [userInProfile, setuserInProfile] = React.useState({});
+  const [userInProfile, setuserInProfile] = React.useState([{}]);
 
   let allBenches = new BenchService();
 
