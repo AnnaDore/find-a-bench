@@ -9,6 +9,9 @@ import Signup from "./components/auth/signup/Signup";
 import Login from "./components/auth/login/Login";
 import Profile from "../src/components/profile/Profile";
 import EditBench from "./components/editBench/EditBench";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+
+import Test from "./components/Test"
 
 export default class App extends Component {
   state = {
@@ -32,14 +35,13 @@ export default class App extends Component {
       });
   };
 
-
   getAllBenches = () => {
     this.allBenches
       .allBenches()
       .then((data) => {
-       // console.log(data[0].location, "all benches react");
-      //  console.log(data);
-       
+        // console.log(data[0].location, "all benches react");
+        //  console.log(data);
+
         this.setState({
           allBenches: data,
         });
@@ -52,7 +54,6 @@ export default class App extends Component {
   componentDidMount = () => {
     this.checkUserLoggedIn();
     this.getAllBenches();
-   
   };
 
   getTheUser = (user) => {
@@ -62,10 +63,9 @@ export default class App extends Component {
     });
   };
 
-
   render() {
- //   console.log(this.state, "App.js");
- //   console.log(this.state.allBenches)
+    //   console.log(this.state, "App.js");
+    //   console.log(this.state.allBenches)
 
     if (this.state.allBenches < 1) {
       return <h2>Loading...</h2>;
@@ -79,7 +79,6 @@ export default class App extends Component {
 
         <main>
           <Switch>
-           
             <Route exact path="/signup" component={Signup} />
             <Route
               exact
@@ -91,20 +90,36 @@ export default class App extends Component {
               path="/"
               render={() => <Map benches={this.state.allBenches} />}
             />
-            <Route
+            {/* <Route
               exact
               path="/profile/:id"
               render={() => (
                 <Profile
                   getMyUser={this.getTheUser}
-                  user={this.state.loggedInUser} 
+                  user={this.state.loggedInUser}
                 />
               )}
+            /> */}
+            <ProtectedRoute
+              path="/profile/:id"
+              component={Profile}
+              getMyUser={this.getTheUser}
+              user={this.state.loggedInUser}
+              test={"test"}
+            />
+            <ProtectedRoute
+              path="/protected/test"
+              component={Test}
+              getMyUser={this.getTheUser}
+              user={this.state.loggedInUser}
+              test={"test"}
             />
             <Route
               exact
               path="/bench/:id"
-              render={(props) => <EditBench {...props} user={this.state.loggedInUser}/>}
+              render={(props) => (
+                <EditBench {...props} user={this.state.loggedInUser} />
+              )}
             />
           </Switch>
         </main>

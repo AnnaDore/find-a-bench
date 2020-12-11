@@ -122,22 +122,7 @@ router.post('/bench/:id/edit', async (req, res, next) => {
     console.log(err)
     res.status(500).json({ message: 'Something went wrong' })
   }
-    // await User.findOneAndUpdate(
-    //   { _id: req.session.user._id },
-    //   { $push: { benches: benchDoc._id } }
-    // );
-     //  res.status(200).json(data);
-      
 
-    // .then((data) => {
-    //   res.status(200).json(data);
-    //   console.log(data, "edit be")
-    //   console.log(req.session.user, "user")
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   res.status(500).json({ message: "Something went wrong" });
-    // });
 })
 
 

@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import BenchService from "../../services/benchService";
 
-export default function Profile(props) {
-  // console.log(props.user, "wrong props from profile");
+export default function Profile(user) {
+ //  console.log(props, "wrong props from profile");
+   //console.log(props.match.params)
+   console.log(user)
+
 
   const [userInProfile, setuserInProfile] = React.useState({});
 
   let allBenches = new BenchService();
 
   useEffect(() => {
-    //  let getUSerInProfileComponentOnly = React.memo(
+  
     allBenches
-      .userProfile(props.user._id)
+      .userProfile(user.computedMatch.params.id)
       .then((data) => {
         console.log(data, "profile in profile");
         console.log(data.benches, "benches in profile");
@@ -21,8 +24,8 @@ export default function Profile(props) {
       .catch((err) => {
         console.log(err);
       });
-    // )
-  }, []);
+    
+   }, []);
   // if(userInProfile[1]) {
   //   console.log(userInProfile[1]);
   // }
@@ -30,7 +33,7 @@ export default function Profile(props) {
   // if(userInProfile[1].benches) {
   //   console.log(userInProfile[1].benches)
   // }
-  console.log(userInProfile)
+// console.log(userInProfile)
 
   return (
     <div>
