@@ -110,8 +110,6 @@ export default class App extends Component {
             <ProtectedRoute
               path="/protected/test"
               component={Test}
-              getMyUser={this.getTheUser}
-              user={this.state.loggedInUser}
               test={"test"}
             />
             <Route
