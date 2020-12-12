@@ -10,7 +10,6 @@ const EditBench = (props) => {
   const [formBench, setFormBench] = useState({
     locationLat: "",
     locationLng: "",
-
     description: "",
   });
 
@@ -45,7 +44,6 @@ const EditBench = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     benchService
       .editBench(formBench, id)
       .then((response) => {
@@ -55,6 +53,17 @@ const EditBench = (props) => {
         console.log(err);
       });
   };
+
+  const handleFileUpload = (e) => {
+    console.log(e, "fileUpload");
+    const uploadData = new FormData();
+    uploadData.append("benchAvatar", e.target.files[0]);
+    console.log(e.target.files)
+    console.log(e.target.files[0])
+    //here will be a route smth like below
+    benchService.imageUpload(uploadData, id);
+  };
+
   console.log(formBench)
   return (
     <form onSubmit={handleSubmit}>
@@ -85,7 +94,13 @@ const EditBench = (props) => {
         ></textarea>
       </div>
       <div className="formField">
-        <input type="file" placeholder="put an image" />
+        <input
+            type="file"
+            name="benchAvatar"
+            onChange={handleFileUpload}
+            // ref={register}
+            placeholder="Upload the bench image!"
+          />
       </div>
       <button type="submit">Submit</button>
     </form>

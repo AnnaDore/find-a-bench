@@ -38,8 +38,8 @@ class BenchService {
       .then(console.log("one behcng get service"));
   };
 
-  imageUpload = (image) => {
-      return this.service.post('/bench/:id/benchAvatar', image)
+  imageUpload = (image, id) => {
+      return this.service.post(`/bench/${id}/benchAvatar`, image)
       .then((response) => response.data)
       .then(console.log("upload image service"));
   }
@@ -48,10 +48,10 @@ class BenchService {
     console.log(formBench, id, "service edit bench")
     const { description, locationLat, locationLng  } = formBench;
     // Dummy images so the code doesn't break
-    const imageUrl = 'http://placehold.it/100x100';
+   // const imageUrl = 'http://placehold.it/100x100';
 
    return this.service.post(`/bench/${id}/edit`, 
-    {  description, imageUrl, location: { lat: locationLat, lng: locationLng } })
+    {  description, location: { lat: locationLat, lng: locationLng } })
     .then(response => response.data)
     .then(console.log('edit service post'))
 
