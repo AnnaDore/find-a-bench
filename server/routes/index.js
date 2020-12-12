@@ -92,7 +92,6 @@ router.post(
     console.log(req.file.filepath)
     console.log(id)
     Bench.findOneAndUpdate({ id: id }, { imageUrl: req.file.filepath })
-
       .then((data) => {
         res.status(200).json(data);
         console.log(data, "BE avatar route")
