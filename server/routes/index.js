@@ -22,15 +22,17 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/addBench", async (req, res, next) => {
-  const { lat, lng } = req.body;
+  const { lat, lng} = req.body;
   // console.log(location)
   try {
     const bench = await Bench.create({
       location: {
         lat: lat,
-        lng,
+        lng
+       
       },
-
+      description: "", 
+      imageUrl: "",
       creator: req.session.user._id
     });
     await User.findOneAndUpdate(
@@ -113,8 +115,7 @@ router.post('/bench/:id/edit', async (req, res, next) => {
       { $set: {
         description: description, 
         imageUrl: imageUrl, 
-        location: location, 
-        creator: req.session.user.id
+        location: location,
       }}, 
       {new: true}
       )
