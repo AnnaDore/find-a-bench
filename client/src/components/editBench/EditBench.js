@@ -5,43 +5,44 @@ export default function EditBench(props) {
   let allBenches = new BenchService();
 
   let id = props.match.params.id;
-  let [benchInEditBench, setBenchInEditBench] = React.useState({});
+  const [benchInEditBench, setBenchInEditBench] = useState(null);
 
-  const giveMeBench = () => {
-    allBenches
-      .oneBenchGet(id)
-      .then((data) => {
-        console.log(data);
-        //   console.log(data.location)
-       // setBenchInEditBench([benchInEditBench, data]);
-        setBenchInEditBench(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    const giveMeBench = () => {
+      console.log("giveMeBench");
+      allBenches
+        .oneBenchGet(id)
+        .then((data) => {
+          console.log(data);
+          setBenchInEditBench(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
   useEffect(() => {
     console.log("use effect in EditBench");
-    giveMeBench();
-    console.log("use effect in EditBench");
-  }, {});
+      giveMeBench();
+  }, []);
 
   console.log(props);
-  console.log(props.match.params.id);
-  console.log(benchInEditBench)
- //console.log(benchInEditBench[1], "benchInEditBench");
+  console.log(benchInEditBench);
 
   return (
     <div>
-      <p>{props.match.params.id}</p>
-      <p>
-            {props.user  ? 
-           
-            benchInEditBench.location.lat :" There is no bench"
+      {benchInEditBench ? (
+        <div>
+
+          <p>{benchInEditBench.creator}</p>
+          <p>{benchInEditBench._id}</p>
+          <p>{benchInEditBench.location.lat}</p>
+
+        </div>
        
-             }
-             </p>   
+      ) : "Loading" }
+
     </div>
   );
 }
+
+

@@ -29,7 +29,7 @@ export default class FinalDrawer extends Component {
       // sideDrawer = <SideDrawer show={this.state.sideDrawerOpen}/>
       backdrop = <Backrdrop click={this.backdropClickHandler} />
     }
-      console.log(this.props.user, "finalDrawer")
+     // console.log(this.props.user, "finalDrawer")
     return (
       <article className="drawer-container">
 

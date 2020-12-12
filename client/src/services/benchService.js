@@ -20,7 +20,7 @@ class BenchService {
     return this.service
       .get("/", { data })
       .then((response) => response.data)
-      .then(console.log("all bench service"));
+     // .then(console.log("all bench service"));
   };
 
   userProfile = (id) => {
