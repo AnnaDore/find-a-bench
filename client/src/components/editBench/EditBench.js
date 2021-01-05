@@ -58,6 +58,7 @@ const EditBench = (props) => {
     console.log(e, "fileUpload");
     const uploadData = new FormData();
     uploadData.append("benchAvatar", e.target.files[0]);
+   
     console.log(e.target.files)
     console.log(e.target.files[0])
     //here will be a route smth like below

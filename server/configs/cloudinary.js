@@ -12,8 +12,8 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: (req, file) => "benches", 
-    allowFormats: ['png', 'jpg']
-    //public_id: (req, file) => 'avatars'
+    allowFormats: ['png', 'jpg'],
+  //  public_id: (req, file) => 'avatars'
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname); 
